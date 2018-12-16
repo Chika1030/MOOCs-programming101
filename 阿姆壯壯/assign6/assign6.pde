@@ -9,7 +9,7 @@ PFont font;
 final int GAME_START = 0, GAME_RUN = 1, GAME_OVER = 2, GAME_WIN = 3;
 int gameState = 0;
 
-final int GRASS_HEIGHT = 15;
+final int GRASS_HEIGHT = 78;
 final int SOIL_COL_COUNT = 8;
 final int SOIL_ROW_COUNT = 24;
 final int SOIL_SIZE = 80;
@@ -19,7 +19,7 @@ Soil[][] soils;
 final int START_BUTTON_WIDTH = 144;
 final int START_BUTTON_HEIGHT = 60;
 final int START_BUTTON_X = 248;
-final int START_BUTTON_Y = 360;
+final int START_BUTTON_Y = 400;
 
 Item[] items;
 Enemy[] enemies;
@@ -198,7 +198,7 @@ void draw() {
 		case GAME_RUN: // In-Game
 		// Background
 		image(bg, 0, 0);
-    image(startline, 0, 0);
+    
     
     
 		// Sun
@@ -212,6 +212,7 @@ void draw() {
 		translate(0, max(SOIL_SIZE * -22, SOIL_SIZE * 1 - player.y));
 
 		// Ground
+    image(startline, 0, -GRASS_HEIGHT);
     /*fill(124, 204, 25);
 		noStroke();
 		rect(0, -GRASS_HEIGHT, width, GRASS_HEIGHT);

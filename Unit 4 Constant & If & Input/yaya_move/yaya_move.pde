@@ -1,44 +1,44 @@
 int x, y, w, h;
-int r, g, b;
 int speedX = 1, speedY = 3;
 
 void setup() {  
-  size(800, 800);
-  x = 100;
-  y = 100;
-  w = h = 600;
+  size(600, 600);
+  x = width/2;
+  y = height/2;
+  w = h = 200;
 }
 
 void draw() {
   background(255);
   
+  rectMode(CENTER);
   noStroke();
-  fill(128);
+  fill(127);
   rect(x, y, w, h);
   fill(255);
-  rect(x+100, y+100, w/3*2, h/3*2);
+  rect(x, y, w/3*2, h/3*2);
   
   //Eyes
-  stroke(128);
-  strokeWeight(10);
-  ellipse(x+200, y+300, w/12, h/12);
-  ellipse(x+400, y+300, w/12, h/12);
+  stroke(127);
+  strokeWeight(3);
+  ellipse(x-w/6, y, w/12, h/12);
+  ellipse(x+w/6, y, w/12, h/12);
   
   //Mouth
   noStroke();
   fill(#FF8B00);
-  ellipse(x+300, y+400, w/3, h/6);
+  ellipse(x, y+h/6, w/3, h/6);
   stroke(255);
-  strokeWeight(7);
-  line(x+200, y+400, x+400, y+400);
+  line(x-w/6, y+h/6, x+w/6, y+h/6);
   
   x += speedX;
   y += speedY;
   
-  if ( x < 0 || x+w > width ) { 
+  
+  if ( x-w/2 < 0 || x+w/2 > width ) { 
       speedX *= -1; 
   } 
-  if ( y < 0 || y+h > height ) { 
+  if ( y-h/2 < 0 || y+h/2 > height ) { 
      speedY *= -1; 
   }
   
