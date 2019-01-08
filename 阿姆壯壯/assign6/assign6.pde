@@ -202,10 +202,10 @@ void draw() {
     
     
 		// Sun
-	    stroke(255,255,0);
-	    strokeWeight(5);
-	    fill(253,184,19);
-	    ellipse(590,50,120,120);
+	    stroke(#FFC900);
+	    strokeWeight(10);
+	    fill(#FFD74B);
+	    ellipse(550,80,135,135);
       // CAREFUL!
 	    // Because of how this translate value is calculated, the Y value of the ground level is actually 0
 		pushMatrix();
@@ -299,7 +299,7 @@ void draw() {
 		textAlign(RIGHT, BOTTOM);
 		fill(0, 120);
 		text(depthString, width + 3, height + 3);
-		fill(#ffcc00);
+		fill(#1D2086);
 		text(depthString, width, height);
 
 		// Time UI

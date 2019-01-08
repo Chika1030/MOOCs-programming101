@@ -19,7 +19,7 @@ class Laser {
 		if(!alive) return;
 
 		strokeWeight(10);
-		stroke(255, 0, 0);
+		stroke(#FFC900);
 		if(dist(x, y, originX, originY) <= maxLength){
 			line(x, y, originX, originY);
 		}else{
