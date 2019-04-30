@@ -1,11 +1,17 @@
 //global variables
 float x, y, size;
+//Sprites
+PImage imgChicken, imgGhost,imgEgg;
+PImage []imgCars;
+PImage imgWin, imgLose;
+
+
 float startY, endY;
 float laneGap;
 float [] carSpeed;
 float [] carX;
-
 int nbrCar = 5;
+
 int life = 3;
 boolean alive=true;
 final int GAME_START = 1;
@@ -15,17 +21,9 @@ final int GAME_RUN = 4;
 final int DIE = 5;
 int gameState;
 
-//Sprites
-PImage imgChicken, imgGhost,imgEgg;
-PImage []imgCars;
-PImage imgWin, imgLose;
 
 void setup(){
   size(400,400);
-  textFont(createFont("font",20));
-  textAlign(CENTER);
-  noStroke();
-  
   carX = new float[nbrCar];
   carSpeed = new float[nbrCar];  
   
@@ -41,15 +39,20 @@ void setup(){
     imgCars[i] = loadImage("data/car" + i + ".png");
     carX[i] = width;
     carSpeed[i] = random(1,5);
- }
- imgChicken = loadImage("data/chicken.png");
- imgGhost = loadImage("data/ghost.png");
- imgEgg = loadImage("data/egg.png");
- imgWin = loadImage("data/win.png");
- imgLose = loadImage("data/lose.png");
+  }
  
- //start game
- gameState = GAME_START; 
+  imgChicken = loadImage("data/chicken.png");
+  imgGhost = loadImage("data/ghost.png");
+  imgEgg = loadImage("data/egg.png");
+  imgWin = loadImage("data/win.png");
+  imgLose = loadImage("data/lose.png");
+ 
+  textFont(createFont("font",20));
+  textAlign(CENTER);
+  noStroke();  
+  
+  //start game
+  gameState = GAME_START; 
 }
 
 void draw(){
@@ -57,8 +60,9 @@ void draw(){
   case  GAME_START:
     background(105,99,214);
     text("Press Enter",width/2,height/2);
-    break;
-   case  GAME_RUN:
+  break;
+    
+  case  GAME_RUN:
     background(214,214,214);
  
     //start and end area
@@ -73,6 +77,7 @@ void draw(){
     //show chicken
     image(imgChicken,x,y); 
     
+    
     //check destination
     if(y>=endY){
       //increase car speed
@@ -82,16 +87,21 @@ void draw(){
       gameState = GAME_WIN;
     }
     
+    
     //cars
     for(int i=0;i<nbrCar;i++){
       float carY = (i+1)*laneGap;
+      
       carX[i] -= carSpeed[i];
+      
       //boundary detection
-      if(carX[i]<0){
-        carX[i]=width;
+      if(carX[i] < 0){
+        carX[i] = width;
       }
+      
       //show cars
       image(imgCars[i],carX[i],carY);
+      
       //hit Test
       if(x+size > carX[i] && x<carX[i]+size &&
          y+size > carY && y< carY+size){
@@ -100,10 +110,11 @@ void draw(){
          gameState = DIE;
          }
        }
-     break;
+    break;
+    
     case  DIE:
       //check life
-      if( life <=0){
+      if( life <= 0 ){
         //rest car speed
         for(int i=0;i<nbrCar;i++){
           carSpeed[i] = random(1,5);         
@@ -111,19 +122,21 @@ void draw(){
         gameState = GAME_LOSE;
       }
       image(imgGhost, x, y);
-      break;
+    break;
+      
     case  GAME_WIN:
       background(0);
       image(imgWin,width/5,height/4);
       fill(255);
       text("You Win!!",width/2,height/4);
-      break;
+    break;
+    
     case  GAME_LOSE:
       background(0);
       image(imgLose,width/5,height/4);
       fill(255);
       text("You Lose!!",width/2,height/4);
-      break;
+    break;
   }
 }
 void keyPressed(){
